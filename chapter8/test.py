@@ -1,5 +1,6 @@
 import numpredict as num
 
+'''
 data = num.wineset3()
 print num.wineprice(99.0,22.0)
 print num.weightedknn(data,(99.0,22.0))
@@ -12,8 +13,12 @@ print (30,120),num.probguess(data,(99.0,20.0),30,120)
 
 # num.cumulativegraph(data,(1,1),120)
 num.probabilitygraph(data,(1,1),120)
+'''
+data = num.wineset2()
+print num.crossvalidate(num.weightedknn,data)
 
-
+data = num.preprocess(data)
+print num.crossvalidate(num.weightedknn,data)
 
 
 

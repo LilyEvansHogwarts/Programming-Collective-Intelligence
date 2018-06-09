@@ -235,4 +235,15 @@ def probabilitygraph(data,vec1,high,k=5,weightf=gaussian,ss=5.0):
     plot(t1,smoothed)
     show()
 
+def preprocess(data):
+    mean = []
+    var = []
+    for i in range(len(data[0]['input'])):
+        mean.append(sum([d['input'][i] for d in data])*1.0/len(data))
+        var.append(math.sqrt(sum([(d['input'][i]-mean[i])**2 for d in data])/len(data)))
+    new_data = []
+    for i in range(len(data)):
+        input = [(data[i]['input'][j] - mean[j])/var[j] for j in range(len(data[i]['input']))]
+        new_data.append({'input':input,'result':data[i]['result']})
+    return new_data
 
