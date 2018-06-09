@@ -88,8 +88,7 @@ def annealingoptimize(domain,costf=schedulecost,T=10000.0,cool=0.95,step=1):
         # vecb = vec let vecb point to the same data as vec
         # vecb = vec[:] copy vec to vecb
         vecb = vec[:]
-        vecb[i] += dir
-        vecb[i] = min(domain[i][1],max(domain[i][0], vecb[i]))
+        vecb[i] = min(domain[i][1],max(domain[i][0], vecb[i]+dir))
 
         ea = costf(vec)
         eb = costf(vecb)
