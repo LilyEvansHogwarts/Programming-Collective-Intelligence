@@ -107,6 +107,22 @@ def drawnode(draw,tree,x,y):
         txt = ' \n'.join(['%s:%d'%v for v in tree.results.items()])
         draw.text((x-20,y),txt,(0,0,0))
 
+def classify(tree,vec):
+    if tree.results != None: return tree.results
+    branch = None
+    if isinstance(tree.value,int) or isinstance(tree.value,float):
+        if vec[tree.col]>=tree.value:
+            branch = tree.tb
+        else:
+            branch = tree.fb
+    else:
+        if vec[tree.col]==tree.value:
+            branch = tree.tb
+        else:
+            branch = tree.fb
+    return classify(branch,vec)
+
+
 class decisionnode:
     def __init__(self,col=-1,value=None,results=None,tb=None,fb=None):
         self.col = col
